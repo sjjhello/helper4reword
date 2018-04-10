@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.sjj.help4reword.fragments.ChatFragment;
 import com.example.sjj.help4reword.fragments.ListFragment;
 import com.example.sjj.help4reword.fragments.MapFragment;
 import com.example.sjj.help4reword.fragments.PersonalFragment;
@@ -16,9 +17,10 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
     private ListFragment listFragment;
     private MapFragment mapFragment;
+    private ChatFragment chatFragment;
     private PersonalFragment personalFragment;
 
-    private static final String[] titles = { "地图","列表", "个人中心"};
+    private static final String[] titles = { "地图","列表","聊天", "个人中心"};
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -48,6 +50,11 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
                 }
                 return listFragment;
             case 2:
+                if (chatFragment == null){
+                    chatFragment = new ChatFragment();
+                }
+                return chatFragment;
+            case 3:
                 if (personalFragment == null){
                     personalFragment = new PersonalFragment();
                 }

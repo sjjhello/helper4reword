@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import com.example.sjj.help4reword.R;
 
 /**
- * Created by sjj on 2018/2/18.
+ * Created by sjj on 2018/4/10.
  */
 
-public class ListFragment extends Fragment {
+public class ChatFragment extends Fragment {
 
     private View view;
 
@@ -23,7 +23,7 @@ public class ListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_list,null);
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_chat, null);
         return view;
     }
 }
