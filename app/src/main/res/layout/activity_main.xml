@@ -39,7 +39,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="5dp"
-                    zsx:icon="@mipmap/map"
+                    zsx:icon="@mipmap/map01"
                     zsx:text_size="12sp" />
 
             </LinearLayout>
@@ -55,7 +55,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="5dp"
-                    zsx:icon="@mipmap/list"
+                    zsx:icon="@mipmap/mission01"
                     zsx:text_size="12sp" />
 
             </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="5dp"
-                    zsx:icon="@mipmap/chat"
+                    zsx:icon="@mipmap/chat01"
                     zsx:text_size="12sp" />
 
             </LinearLayout>
@@ -87,7 +87,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="5dp"
-                    zsx:icon="@mipmap/personal"
+                    zsx:icon="@mipmap/personal01"
                     zsx:text_size="12sp" />
 
             </LinearLayout>

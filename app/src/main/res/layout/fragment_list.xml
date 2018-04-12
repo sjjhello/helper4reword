@@ -5,7 +5,7 @@
     >
 
 <ListView
-    android:id="@+id/mission_list"
+    android:id="@+id/lv_mission"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 

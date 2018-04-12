@@ -1,4 +1,4 @@
-package com.example.sjj.help4reword.activitise;
+package com.example.sjj.help4reword.activies;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         initTabIndicator();
         initFab();
     }
+
 
     private void initTabIndicator() {
 

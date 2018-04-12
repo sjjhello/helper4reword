@@ -5,5 +5,11 @@
     android:orientation="horizontal"
     >
 
+    <ListView
+        android:id="@+id/lv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
 
 </LinearLayout>

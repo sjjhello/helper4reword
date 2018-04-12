@@ -4,6 +4,7 @@
     <color name="border_clo">#ccc</color>
     <color name="text_clo">#333</color>
 
+    <color name="transparent">#00000000</color>
     <color name="window_background">#eee</color>
 
     <color name="colorPrimary">#3F51B5</color>
