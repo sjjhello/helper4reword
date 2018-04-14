@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sjj.help4reword.Bean.ChatListBean;
+import com.example.sjj.help4reword.bean.ChatListBean;
 import com.example.sjj.help4reword.R;
 
 import java.util.ArrayList;

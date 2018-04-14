@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.sjj.help4reword.Bean.ChatListBean;
+import com.example.sjj.help4reword.bean.ChatListBean;
 import com.example.sjj.help4reword.R;
 import com.example.sjj.help4reword.adapters.ChatViewAdapter;
 

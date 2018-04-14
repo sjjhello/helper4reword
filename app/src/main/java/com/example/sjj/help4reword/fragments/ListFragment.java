@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.sjj.help4reword.Bean.MissionListBean;
+import com.example.sjj.help4reword.bean.MissionListBean;
 import com.example.sjj.help4reword.R;
 import com.example.sjj.help4reword.adapters.MissionViewAdapter;
 
@@ -47,9 +47,11 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         MissionViewAdapter missionViewAdapter = new MissionViewAdapter(list_mission,getActivity());
         lv_mission.setAdapter(missionViewAdapter);
         //添加数据
-        for(int i=1;i<20;i++){
-            list_mission.add(new MissionListBean("50.00","任务"+i,"广州","2018/4/11"));
-        }
+        list_mission.add(new MissionListBean("50.00","图书帮忙借取","广州","2018/4/11"));
+        list_mission.add(new MissionListBean("5.00","提供X老师的联系方式","广州","2018/4/11"));
+        list_mission.add(new MissionListBean("40.00","请求！帮忙取份论文","广州","2018/4/11"));
+        list_mission.add(new MissionListBean("2.00","h5楼下代拿外卖","广州","2018/4/11"));
+        list_mission.add(new MissionListBean("36.00","益禾堂代购","广州","2018/4/11"));
         missionViewAdapter.notifyDataSetChanged();
     }
 

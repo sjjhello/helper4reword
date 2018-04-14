@@ -1,4 +1,4 @@
-package com.example.sjj.help4reword.Bean;
+package com.example.sjj.help4reword.bean;
 
 /**
  * Created by sjj on 2018/4/10.

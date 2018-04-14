@@ -36,7 +36,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         initView();
         setListener();
+
     }
+
 
     private void setListener() {
         mViewPager.setOnPageChangeListener(this);

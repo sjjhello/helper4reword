@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.sjj.help4reword.Bean.MissionListBean;
+import com.example.sjj.help4reword.bean.MissionListBean;
 import com.example.sjj.help4reword.R;
 
 import java.util.List;
