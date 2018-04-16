@@ -20,11 +20,16 @@ public class MissionViewAdapter extends BaseAdapter{
 
     private List<MissionListBean> mData;
     private Context mContext;
+    private LayoutInflater mLayoutInflater;//布局装载器对象
 
+    public MissionViewAdapter(Context context){
+        mContext = context;
+    }
 
     public MissionViewAdapter(List<MissionListBean> mData, Context mContext){
         this.mData = mData;
         this.mContext = mContext;
+        mLayoutInflater = LayoutInflater.from(mContext);
     }
 
 

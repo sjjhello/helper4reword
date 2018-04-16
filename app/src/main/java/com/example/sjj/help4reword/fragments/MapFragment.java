@@ -1,22 +1,28 @@
 package com.example.sjj.help4reword.fragments;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.sjj.help4reword.R;
+import com.example.sjj.help4reword.activies.MainActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by sjj on 2018/2/18.
@@ -27,15 +33,12 @@ public class MapFragment extends Fragment implements LocationSource,AMapLocation
     private View view;
     private MapView mapView = null;
     private AMap aMap;
-    private OnLocationChangedListener mListener;
-    private MyLocationStyle myLocationStyle;
-    private AMapLocationClient locationClient;
-    private AMapLocationClientOption clientOption;
 
-    public static MapFragment newInstance(){
-        MapFragment mapFragment = new MapFragment();
-        return  mapFragment;
-    }
+    private OnLocationChangedListener mListener;
+    private AMapLocationClient mlocationClient;
+    private AMapLocationClientOption mLocationOption;
+    private String location;
+
 
     public MapFragment(){
 
@@ -50,33 +53,39 @@ public class MapFragment extends Fragment implements LocationSource,AMapLocation
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        initLocation();
         view = inflater.inflate(R.layout.fragment_map, container, false);
-        initView(savedInstanceState,view);
-        mapView.onCreate(savedInstanceState);
         return view;
     }
 
-    private void initLocation(){
-        //初始化定位
-        locationClient = new AMapLocationClient(this.getActivity().getApplicationContext());
-//初始化AMapLocationClientOption对象
-        clientOption = new AMapLocationClientOption();
-//设置定位模式为高精度模式。
-        clientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-//设置定位回调监听
-        locationClient.setLocationListener(this);
-//获取一次定位结果
-        clientOption.setOnceLocation(true);
-//设置是否返回地址信息（默认返回地址信息）
-        clientOption.setNeedAddress(true);
-//给定位客户端对象设置定位参数
-        locationClient.setLocationOption(clientOption);
-//启动定位
-        locationClient.startLocation();
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mapView= (MapView) view.findViewById(R.id.mapView);
+        if(mapView != null){
+            mapView.onCreate(savedInstanceState);
+            aMap = mapView.getMap();
+        }
+        initLocationService();
 
     }
 
+
+    private void initLocationService() {
+        if (aMap != null) {
+            MyLocationStyle myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类
+            myLocationStyle.interval(5000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
+            myLocationStyle.showMyLocation(true);
+            //myLocationStyle.strokeColor(Color.argb(0, 0, 0, 0));
+            myLocationStyle.radiusFillColor(Color.argb(0, 0, 0, 0));
+            myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW) ;
+            aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
+            aMap.getUiSettings().setMyLocationButtonEnabled(true);//设置默认定位按钮是否显示，非必需设置。
+            aMap.setMyLocationEnabled(true);
+            aMap.moveCamera(CameraUpdateFactory.zoomTo(16));//地图初始比例
+
+        }
+    }
 
     /**
      * 必须重写以下方法
@@ -90,6 +99,7 @@ public class MapFragment extends Fragment implements LocationSource,AMapLocation
     @Override
     public void onPause() {
         super.onPause();
+        deactivate();
         mapView.onPause();
     }
 
@@ -103,72 +113,81 @@ public class MapFragment extends Fragment implements LocationSource,AMapLocation
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-    }
-
-    private void initView(Bundle savedInstanceState,View view){
-        mapView= (MapView) view.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        if (aMap==null)
-        {
-            aMap=mapView.getMap();
+        if(null != mlocationClient){
+            mlocationClient.onDestroy();
         }
-        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
-        aMap.setLocationSource(this);
-        aMap.setMyLocationEnabled(true);
-        aMap.setMapType(AMap.MAP_TYPE_NORMAL);
     }
-
-
 
 
     @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (mListener != null && aMapLocation != null) {
-            if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
-                aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
-                aMapLocation.getLatitude();//获取纬度
-                aMapLocation.getLongitude();//获取经度
-                aMapLocation.getAccuracy();//获取精度信息
-                aMapLocation.getCountry();//国家信息
-                aMapLocation.getProvince();//省信息
-                aMapLocation.getCity();//城市信息
-                aMapLocation.getDistrict();//城区信息
-                aMapLocation.getStreet();//街道信息
-                aMapLocation.getStreetNum();//街道门牌号信息
-                aMapLocation.getCityCode();//城市编码
-                aMapLocation.getAdCode();//地区编码
-                mListener.onLocationChanged(aMapLocation);
-            } else {
-                String errText = "定位失败," + aMapLocation.getErrorCode()+ ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr",errText);
-                Toast.makeText(this.getActivity().getApplicationContext(), "定位失败", Toast.LENGTH_LONG).show();
+    public void onLocationChanged(AMapLocation amaplocation) {
+        if (amaplocation != null && mListener != null) {
+            if (amaplocation != null && amaplocation.getErrorCode() == 0) {
+                mListener.onLocationChanged(amaplocation);
+
+                amaplocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
+                amaplocation.getLatitude();//获取纬度
+                amaplocation.getLongitude();//获取经度
+                amaplocation.getAccuracy();//获取精度信息
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(amaplocation.getTime());
+                df.format(date);//定位时间
+                amaplocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+                amaplocation.getCountry();//国家信息
+                amaplocation.getProvince();//省信息
+                amaplocation.getCity();//城市信息
+                amaplocation.getDistrict();//城区信息
+                amaplocation.getStreet();//街道信息
+                amaplocation.getStreetNum();//街道门牌号信息
+                amaplocation.getCityCode();//城市编码
+                amaplocation.getAdCode();//地区编码
+
+                location = amaplocation.getAddress();
+                Intent intentLocation = new Intent(this.getActivity(), MainActivity.class);
+                intentLocation.putExtra("location",location);
+                startActivity(intentLocation);
             }
+            else {
+                location = "定位失败";
+                String errText = "定位失败，" + amaplocation.getErrorCode()+ ": "
+                        + amaplocation.getErrorInfo();
+                Log.e("error",errText);
+            }
+
         }
     }
 
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
+
         mListener = onLocationChangedListener;
-        if(locationClient==null){
-            locationClient=new AMapLocationClient(getActivity());
-            clientOption=new AMapLocationClientOption();
-            locationClient.setLocationListener(this);
-            clientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//高精度定位
-            clientOption.setOnceLocationLatest(true);//设置单次精确定位
-            locationClient.setLocationOption(clientOption);
-            locationClient.startLocation();
+        if (mlocationClient == null) {
+            mlocationClient = new AMapLocationClient(getActivity().getApplicationContext());
+            mLocationOption = new AMapLocationClientOption();
+            mlocationClient.setLocationListener(this);
+            //获取一次定位结果
+            mLocationOption.setOnceLocation(true);
+            //设置是否返回地址信息（默认返回地址信息）
+            mLocationOption.setNeedAddress(true);
+            mLocationOption.setInterval(2000);
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            mlocationClient.setLocationOption(mLocationOption);
+            mlocationClient.startLocation();
         }
     }
 
     @Override
     public void deactivate() {
-        mListener=null;
-        if(locationClient!=null){
-            locationClient.stopLocation();
-            locationClient.onDestroy();
+        mListener = null;
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
         }
-        locationClient=null;
+        mlocationClient = null;
+        mLocationOption = null;
     }
+
+
+
+
 }

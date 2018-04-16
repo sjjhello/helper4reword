@@ -6,13 +6,14 @@ import android.os.Bundle;
 import com.example.sjj.help4reword.R;
 
 /**
- * Created by sjj on 2018/4/14.
+ * Created by sjj on 2018/4/15.
  */
 
-public class MissionDetailActivity extends Activity{
+public class UserSettingActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mission_accepted_detail);
+        setContentView(R.layout.user_setting);
     }
+
 }

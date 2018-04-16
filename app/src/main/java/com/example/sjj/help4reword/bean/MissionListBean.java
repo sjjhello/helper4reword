@@ -5,11 +5,11 @@ package com.example.sjj.help4reword.bean;
  */
 
 public class MissionListBean {
-    private String title;
-    private String context;
-    private String reword;
-    private String time;
-    private String location;
+    public String title;
+    public String context;
+    public String reword;
+    public String time;
+    public String location;
 
 
     public MissionListBean(){

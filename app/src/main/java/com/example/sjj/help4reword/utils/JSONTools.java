@@ -1,7 +1,6 @@
 package com.example.sjj.help4reword.utils;
 
 import com.example.sjj.help4reword.bean.MissionListBean;
-import com.example.sjj.help4reword.bean.UserBean;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,19 +22,6 @@ public class JSONTools {
      * @param jsonString 返回的json数据
      * @return
      */
-    public static UserBean getUser(String key,String jsonString){
-        UserBean userBean = new UserBean();
-        try{
-            JSONObject jsonObject = new JSONObject(jsonString);
-            JSONObject userObject = jsonObject.getJSONObject(key);
-            userBean.setCode(userObject.getInt("code"));
-            userBean.setToken(userObject.getString("token"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return userBean;
-    }
-
 
     public static List<MissionListBean> getMissionList(String key,String jsonString){
         List<MissionListBean> list = new ArrayList<MissionListBean>();

@@ -4,9 +4,23 @@
     android:layout_height="match_parent"
     >
 
+
+    <TextView
+        android:id="@+id/tv_MissionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="任务列表"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
 <ListView
     android:id="@+id/lv_mission"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tv_MissionTitle"
+    />
 
 </RelativeLayout>

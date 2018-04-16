@@ -46,9 +46,12 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
         ChatViewAdapter chatViewAdapter = new ChatViewAdapter(list_chat ,getActivity());
         lv_chat.setAdapter(chatViewAdapter);
         //添加数据
-        for(int i=1;i<20;i++){
-            list_chat.add(new ChatListBean(R.mipmap.personal01,"我是"+i,"helloworld"));
-        }
+        list_chat.add(new ChatListBean(R.drawable.user5,"cengjing","今天有空呢~~"));
+        list_chat.add(new ChatListBean(R.drawable.user2,"zJunshao","正常接单"));
+        list_chat.add(new ChatListBean(R.drawable.user3,"toby1352015146","Good job"));
+        list_chat.add(new ChatListBean(R.drawable.user4,"MaXnihaker","砸我，砸我，拼命赚钱"));
+        list_chat.add(new ChatListBean(R.drawable.user1,"Betty","幸福过每一天"));
+
         chatViewAdapter.notifyDataSetChanged();
 
     }

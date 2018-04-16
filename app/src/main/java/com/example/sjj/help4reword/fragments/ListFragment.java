@@ -2,15 +2,15 @@ package com.example.sjj.help4reword.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.sjj.help4reword.bean.MissionListBean;
 import com.example.sjj.help4reword.R;
 import com.example.sjj.help4reword.adapters.MissionViewAdapter;
+import com.example.sjj.help4reword.bean.MissionListBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by sjj on 2018/2/18.
  */
 
-public class ListFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private ListView lv_mission;
     private View view;
@@ -56,8 +56,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onRefresh() {
 
     }
 }
